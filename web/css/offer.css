@@ -1,0 +1,59 @@
+body {
+  background-color: #1a1f36;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  background-color: #242b48;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.container-content{
+  margin-top: 90px;
+  color: #ffffff;
+}
+
+h1, h2, h3 {
+  color: #ffffff;
+}
+
+.btn-primary {
+  background-color: #374785;
+  border-color: #374785;
+}
+
+
+.alert-success {
+  background-color: #2a7c4f;
+  color: #ffffff;
+}
+
+.alert-danger {
+  background-color: #c0392b;
+  color: #ffffff;
+}
+
+.grid-view {
+  background-color: #2d354b;
+  color: #ffffff;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.table tr:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+
+.table tr:nth-child(even) {
+  background-color: #ffffff;
+}
+
+.grid-view tr:hover {
+  background-color: #8d90a0;
+}
+
+#filter-form{
+  margin-bottom: 20px;
+}
