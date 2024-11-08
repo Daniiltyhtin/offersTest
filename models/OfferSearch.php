@@ -11,7 +11,7 @@ class OfferSearch extends Offer
     {
         return [
             [['id'], 'integer'],
-            [['offer_name', 'email'], 'safe'],
+            [['name', 'email', 'phone'], 'safe'],
         ];
     }
 
@@ -21,11 +21,6 @@ class OfferSearch extends Offer
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'pagination' => ['pageSize' => 10],
-            'sort' => [
-                'defaultOrder' => ['id' => SORT_ASC],
-                'attributes' => ['id', 'offer_name'],
-            ],
         ]);
 
         $this->load($params);
@@ -34,8 +29,8 @@ class OfferSearch extends Offer
             return $dataProvider;
         }
 
-        // Фильтры
-        $query->andFilterWhere(['like', 'offer_name', $this->offer_name])
+        $query->andFilterWhere(['id' => $this->id])
+              ->andFilterWhere(['like', 'name', $this->name])
               ->andFilterWhere(['like', 'email', $this->email]);
 
         return $dataProvider;

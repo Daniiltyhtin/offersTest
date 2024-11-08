@@ -4,25 +4,54 @@ body {
   font-family: Arial, sans-serif;
 }
 
-.container {
+body h1 {
+  font-size: 1.8em;
+}
+main {
+  display: flex;
+  justify-content: center;
+}
+.wrapper {
+  height: 100%;
+  margin-top: 56px;
+  display: inline-block;
   background-color: #242b48;
   padding: 20px;
-  border-radius: 8px;
+  color: #ffffff;
+  min-width: 750px;
 }
 
-.container-content{
-  margin-top: 90px;
+h1,
+h2,
+h3 {
   color: #ffffff;
 }
 
-h1, h2, h3 {
+.button {
   color: #ffffff;
-}
-
-.btn-primary {
   background-color: #374785;
-  border-color: #374785;
+  border: 1px solid #283a83;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.1s ease;
 }
+
+.button:hover {
+  background-color: #495daf;
+  border-color: #374785;
+  color: #000000;
+}
+
+.button:active {
+  background-color: #2e3a63;
+  color: #ffffff;
+  transform: translateY(2px); /* Смещение кнопки при нажатии */
+}
+
+.btn-filter{
+  margin-left: 30px;
+}
+
 
 
 .alert-success {
@@ -40,20 +69,15 @@ h1, h2, h3 {
   color: #ffffff;
   border-radius: 8px;
   padding: 10px;
+  display: inline-block;
+  width: 100%;
+}
+.table {
+  width: 80%;
 }
 
-.table tr:nth-child(odd) {
-  background-color: #f9f9f9;
-}
 
-.table tr:nth-child(even) {
-  background-color: #ffffff;
-}
 
-.grid-view tr:hover {
-  background-color: #8d90a0;
-}
-
-#filter-form{
+#filter-form {
   margin-bottom: 20px;
 }

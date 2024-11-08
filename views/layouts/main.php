@@ -16,7 +16,9 @@ $this->registerMetaTag(['charset' => Yii::$app->charset], 'charset');
 $this->registerMetaTag(['name' => 'viewport', 'content' => 'width=device-width, initial-scale=1, shrink-to-fit=no']);
 $this->registerMetaTag(['name' => 'description', 'content' => $this->params['meta_description'] ?? '']);
 $this->registerMetaTag(['name' => 'keywords', 'content' => $this->params['meta_keywords'] ?? '']);
-$this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii::getAlias('@web/favicon.ico')]);
+
+$this->registerJsFile('@web/js/offer.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+
 
 ?>
 <?php $this->beginPage() ?>
@@ -46,9 +48,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
             'items' => [
                 ['label' => 'Офферы', 'url' => ['/offer/index']], // Перейти к списку офферов
                 ['label' => 'Создать оффер', 'url' => ['/offer/create']], // Перейти к созданию оффера
-                ['label' => 'Home', 'url' => ['/site/index']],
-                ['label' => 'About', 'url' => ['/site/about']],
-                ['label' => 'Contact', 'url' => ['/site/contact']],
+
 
             ]
         ]);
@@ -57,10 +57,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
     </header>
 
     <main id="main" class="flex-shrink-0" role="main">
-        <div class=" container container-content">
-            <?php if (!empty($this->params['breadcrumbs'])): ?>
-                <?= Breadcrumbs::widget(['links' => $this->params['breadcrumbs']]) ?>
-            <?php endif ?>
+        <div class="wrapper">
 
             <?php foreach (Yii::$app->session->getAllFlashes() as $type => $message): ?>
                 <div class="alert alert-<?= Html::encode($type) ?> alert-dismissible fade show" role="alert">

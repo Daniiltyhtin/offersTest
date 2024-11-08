@@ -31,10 +31,11 @@ class Offer extends \yii\db\ActiveRecord
         return [
             [['offer_name', 'email'], 'required'],
             [['created_at'], 'safe'],
+            ['phone', 'match', 'pattern' => '/^\+?[0-9]{10,15}$/', 'message' => 'Введите корректный номер телефона. Допускаются только цифры и, при необходимости, знак + в начале.'],
             [['offer_name', 'email'], 'string', 'max' => 255],
             [['email'], 'unique'],
             ['email', 'email'],
-            ['phone', 'string', 'max'=> 15],
+            ['phone', 'string', 'max' => 15],
         ];
     }
 

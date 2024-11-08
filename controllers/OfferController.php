@@ -8,6 +8,7 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\Response;
 
 class OfferController extends Controller
 {
@@ -26,11 +27,11 @@ class OfferController extends Controller
     public function actionIndex()
     {
         $query = Offer::find();
-
-        if ($name = Yii::$app->request->get('name')) {
-            $query->andFilterWhere(['like', 'name', $name]);
+        // - фильтрация по имени оффера 
+        if ($name = Yii::$app->request->get('offer_name')) {
+            $query->andFilterWhere(['like', 'offer_name', $name]);
         }
-
+        // - фильтрация по email оффера 
         if ($email = Yii::$app->request->get('email')) {
             $query->andFilterWhere(['like', 'email', $email]);
         }
@@ -53,36 +54,49 @@ class OfferController extends Controller
     public function actionCreate()
     {
         $model = new Offer();
-    
+
         // Загружаем данные из запроса и пытаемся сохранить модель
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->session->setFlash('success', 'Оффер успешно создан.');
-            return $this->redirect(['index']);
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            if ($model->save()) {
+                Yii::$app->response->format = Response::FORMAT_JSON;
+                return [
+                    "success" => true,  // Если оффер успешно создан
+                ];
+            } else {
+                Yii::$app->response->statusCode = 400; // Устанавливаем код ошибки
+                return $this->asJson([
+                    'errors' => $model->errors,
+                ]);
+            }
+
         }
-    
-        // Если это AJAX-запрос, возвращаем ошибки в формате JSON
-        if (Yii::$app->request->isAjax) {
-            Yii::$app->response->statusCode = 400; // Устанавливаем код ошибки
-            return $this->asJson([
-                'errors' => $model->errors,
-            ]);
-        }
-    
+
         // Если это обычный запрос, возвращаем вид с ошибками
         return $this->render('create', [
             'model' => $model,
         ]);
     }
-    
-    
+
+
+
 
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->session->setFlash('success', 'Оффер успешно обновлен.');
-            return $this->redirect(['index']);
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            if ($model->save()) {
+                Yii::$app->response->format = Response::FORMAT_JSON;
+                return [
+                    "success" => true,  // Если оффер успешно создан
+                ];
+            } else {
+                Yii::$app->response->statusCode = 400; // Устанавливаем код ошибки
+                return $this->asJson([
+                    'errors' => $model->errors,
+                ]);
+            }
+
         }
 
         return $this->render('update', [

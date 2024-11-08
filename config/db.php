@@ -2,8 +2,8 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=offerstest',
-    'username' => 'root',
+    'dsn' => 'mysql:host=localhost;dbname=yourBd',
+    'username' => 'yourUser',
     'password' => '',
     'charset' => 'utf8',
 
